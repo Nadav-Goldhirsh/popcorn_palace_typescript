@@ -8,14 +8,11 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { Movie } from './movie/schema/movie.schema';
 import { Showtime } from './showtime/schema/showtime.schema';
 import { Booking } from './booking/schema/booking.schema';
+import { postgresConfig } from './config/postgres.config';
 
 @Module({
   imports: [TypeOrmModule.forRoot({
-    type: "postgres",
-    host: 'localhost',
-    port: 5432,
-    username: 'postgres',
-    password: 'postgres',
+    ...postgresConfig,
     entities: [Movie, Showtime, Booking]
   }) ,MovieModule, ShowtimeModule, BookingModule],
   controllers: [AppController],
