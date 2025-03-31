@@ -1,33 +1,23 @@
-import { Injectable } from '@nestjs/common';
+import { Inject, Injectable, InternalServerErrorException } from '@nestjs/common';
 import { CreateBookingDto } from './dto/create-booking.dto';
+import { Repository } from 'typeorm';
+import { Booking } from './schema/booking.schema';
+import { InjectRepository } from '@nestjs/typeorm';
 
 @Injectable()
 export class BookingService {
-  private bookings = [];
-  private nextId = 1;
+  constructor(@InjectRepository(Booking) private bookingRepository: Repository<Booking>) { 
+  }
 
   create(bookingData: CreateBookingDto) {
-    // Check if seat is already booked for this showtime
-    const alreadyBooked = this.bookings.find(
-      (b) =>
-        b.showtimeId === bookingData.showtimeId &&
-        b.seat.toLowerCase() === bookingData.seat.toLowerCase(),
-    );
-
-    if (alreadyBooked) {
-      return { error: 'Seat already booked for this showtime.' };
+    try {
+    return this.bookingRepository.save(bookingData)
+    } catch(error) {
+      throw new InternalServerErrorException("You cant double book")
     }
-
-    const newBooking = {
-      id: this.nextId++,
-      ...bookingData,
-    };
-
-    this.bookings.push(newBooking);
-    return newBooking;
   }
 
   findAll() {
-    return this.bookings;
+    return this.bookingRepository.find({loadRelationIds: true});
   }
 }

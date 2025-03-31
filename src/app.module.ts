@@ -4,9 +4,20 @@ import { AppService } from './app.service';
 import { MovieModule } from './movie/movie.module';
 import { ShowtimeModule } from './showtime/showtime.module';
 import { BookingModule } from './booking/booking.module';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { Movie } from './movie/schema/movie.schema';
+import { Showtime } from './showtime/schema/showtime.schema';
+import { Booking } from './booking/schema/booking.schema';
 
 @Module({
-  imports: [MovieModule, ShowtimeModule, BookingModule], 
+  imports: [TypeOrmModule.forRoot({
+    type: "postgres",
+    host: 'localhost',
+    port: 5432,
+    username: 'postgres',
+    password: 'postgres',
+    entities: [Movie, Showtime, Booking]
+  }) ,MovieModule, ShowtimeModule, BookingModule],
   controllers: [AppController],
   providers: [AppService],
 })
