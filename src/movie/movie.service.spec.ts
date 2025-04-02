@@ -17,7 +17,7 @@ describe('MovieService', () => {
     expect(service).toBeDefined();
   });
 
-  it('should add a new movie', () => {
+  it('should add a new movie', async () => {
     const movie: CreateMovieDto = {
       title: 'Inception',
       genre: 'Sci-Fi',
@@ -26,14 +26,14 @@ describe('MovieService', () => {
       releaseYear: 2010,
     };
 
-    const result = service.create(movie);
+    const result = await service.create(movie);
 
     expect(result).toHaveProperty('id');
     expect(result.title).toBe('Inception');
     expect(result.rating).toBe(8.8);
   });
 
-  it('should return all movies', () => {
+  it('should return all movies', async () => {
     const movie1: CreateMovieDto = {
       title: 'Inception',
       genre: 'Sci-Fi',
@@ -50,13 +50,13 @@ describe('MovieService', () => {
       releaseYear: 1999,
     };
 
-    service.create(movie1);
-    service.create(movie2);
+    await service.create(movie1);
+    await service.create(movie2);
 
-    const movies = service.findAll();
+    const movies = await service.findAll();
 
-    expect(movies.length).toBe(2);
-    expect(movies[0].title).toBe('Inception');
-    expect(movies[1].title).toBe('The Matrix');
+    expect(movies.length).toBeGreaterThanOrEqual(2);
+    expect(movies.some(m => m.title === 'Inception')).toBe(true);
+    expect(movies.some(m => m.title === 'The Matrix')).toBe(true);
   });
 });

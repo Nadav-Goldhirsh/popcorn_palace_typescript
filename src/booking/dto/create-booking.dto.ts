@@ -1,5 +1,5 @@
 import { Expose } from 'class-transformer';
-import { IsInt, IsString } from 'class-validator';
+import { IsInt, IsString, IsUUID } from 'class-validator';
 
 export class CreateBookingDto {
   @IsInt()
@@ -9,4 +9,8 @@ export class CreateBookingDto {
   @IsString()
   @Expose()
   seat: string;
+
+  @IsUUID()
+  @Expose()
+  userId: string;
 }

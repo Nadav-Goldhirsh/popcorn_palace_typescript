@@ -18,6 +18,10 @@ export class BookingService {
   }
 
   findAll() {
-    return this.bookingRepository.find({loadRelationIds: true});
+    return this.bookingRepository.find({
+      where: { deleted: false },
+      loadRelationIds: true,
+    });
   }
+  
 }

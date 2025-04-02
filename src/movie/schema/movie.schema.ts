@@ -19,4 +19,8 @@ export class Movie {
 
   @Column({name: 'release_year', type: "int"})
   releaseYear: number;
+
+  @Column({ name: 'deleted', type: 'boolean', default: false })
+  deleted: boolean;
+
 }
