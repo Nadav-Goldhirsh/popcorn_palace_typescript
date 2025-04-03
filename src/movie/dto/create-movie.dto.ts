@@ -1,24 +1,35 @@
-import { Expose } from 'class-transformer';
-import { IsString, IsNumber, IsInt } from 'class-validator';
+import {
+  IsString,
+  IsNumber,
+  IsInt,
+  IsPositive,
+  Min,
+  Max,
+  IsNotEmpty,
+} from 'class-validator';
 
 export class CreateMovieDto {
   @IsString()
-  @Expose()
+  @IsNotEmpty()
   title: string;
 
   @IsString()
-  @Expose()
+  @IsNotEmpty()
   genre: string;
 
   @IsInt()
-  @Expose()
+  @IsPositive({ message: 'Duration must be a positive integer' })
+  @IsNotEmpty()
   duration: number;
 
   @IsNumber()
-  @Expose()
+  @Min(0)
+  @Max(10)
+  @IsNotEmpty()
   rating: number;
 
   @IsInt()
-  @Expose()
+  @IsNotEmpty()
+  @Max(2025)
   releaseYear: number;
 }

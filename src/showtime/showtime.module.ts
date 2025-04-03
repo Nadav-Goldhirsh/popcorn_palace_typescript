@@ -5,9 +5,8 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { Showtime } from './schema/showtime.schema';
 import { Booking } from 'src/booking/schema/booking.schema';
 
-
 @Module({
-  imports: [TypeOrmModule.forFeature([Showtime,Booking])],
+  imports: [TypeOrmModule.forFeature([Showtime, Booking])],
   controllers: [ShowtimeController],
   providers: [ShowtimeService],
 })

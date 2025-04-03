@@ -1,24 +1,29 @@
-import { Expose, Transform } from 'class-transformer';
-import { IsInt, IsNumber, IsString, IsDateString } from 'class-validator';
+import {
+  IsInt,
+  IsNumber,
+  IsString,
+  IsDateString,
+  IsNotEmpty,
+} from 'class-validator';
 
 export class CreateShowtimeDto {
   @IsInt()
-  @Expose()
+  @IsNotEmpty()
   movieId: number;
 
   @IsString()
-  @Expose()
+  @IsNotEmpty()
   theater: string;
 
   @IsDateString()
-  @Expose()
+  @IsNotEmpty()
   startTime: string;
 
   @IsDateString()
-  @Expose()
+  @IsNotEmpty()
   endTime: string;
 
   @IsNumber()
-  @Expose()
+  @IsNotEmpty()
   price: number;
 }

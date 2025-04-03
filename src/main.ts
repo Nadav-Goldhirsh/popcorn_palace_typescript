@@ -11,11 +11,21 @@ async function bootstrap() {
     .setDescription('The Movie Ticket Booking System API')
     .setVersion('1.0')
     .build();
-
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app, document);
 
-  app.useGlobalPipes(new ValidationPipe({transform: true, transformOptions: {excludeExtraneousValues: true}}))
+  app.useGlobalPipes(
+    new ValidationPipe({
+      whitelist: true,
+      forbidNonWhitelisted: true,
+      forbidUnknownValues: true,
+      transform: true,
+      // REMOVE THIS:
+      // transformOptions: {
+      //   excludeExtraneousValues: true,
+      // },
+    }),
+  );
 
   await app.listen(3000);
 }

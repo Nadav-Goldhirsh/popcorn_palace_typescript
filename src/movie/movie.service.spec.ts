@@ -56,7 +56,7 @@ describe('MovieService', () => {
     const movies = await service.findAll();
 
     expect(movies.length).toBeGreaterThanOrEqual(2);
-    expect(movies.some(m => m.title === 'Inception')).toBe(true);
-    expect(movies.some(m => m.title === 'The Matrix')).toBe(true);
+    expect(movies.some((m) => m.title === 'Inception')).toBe(true);
+    expect(movies.some((m) => m.title === 'The Matrix')).toBe(true);
   });
 });

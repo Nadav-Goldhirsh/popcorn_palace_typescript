@@ -1,16 +1,15 @@
-import { Expose } from 'class-transformer';
-import { IsInt, IsString, IsUUID } from 'class-validator';
+import { IsInt, IsString, IsUUID, IsNotEmpty } from 'class-validator';
 
 export class CreateBookingDto {
   @IsInt()
-  @Expose()
+  @IsNotEmpty()
   showtimeId: number;
 
   @IsString()
-  @Expose()
+  @IsNotEmpty()
   seat: string;
 
   @IsUUID()
-  @Expose()
+  @IsNotEmpty()
   userId: string;
 }

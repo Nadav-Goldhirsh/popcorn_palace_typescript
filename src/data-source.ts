@@ -11,5 +11,5 @@ export const AppDataSource = new DataSource({
   password: 'postgres',
   database: 'popcorn',
   entities: [Movie, Showtime, Booking],
-  synchronize: true, 
+  synchronize: true,
 });

@@ -11,10 +11,15 @@ import { Booking } from './booking/schema/booking.schema';
 import { postgresConfig } from './config/postgres.config';
 
 @Module({
-  imports: [TypeOrmModule.forRoot({
-    ...postgresConfig,
-    entities: [Movie, Showtime, Booking]
-  }) ,MovieModule, ShowtimeModule, BookingModule],
+  imports: [
+    TypeOrmModule.forRoot({
+      ...postgresConfig,
+      entities: [Movie, Showtime, Booking],
+    }),
+    MovieModule,
+    ShowtimeModule,
+    BookingModule,
+  ],
   controllers: [AppController],
   providers: [AppService],
 })
